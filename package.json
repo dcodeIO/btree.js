@@ -1,0 +1,17 @@
+{
+    "name": "btreejs",
+    "description": "A ridiculously lean B-tree of variable orders in plain JavaScript. Closure-compiled using advanced optimizations, 100% typed code.",
+    "version": "0.2.0",
+    "author": "Daniel Wirtz <dcode@dcode.io>",
+    "main": "btree.min.js",
+    "dependencies": {},
+    "devDependencies": {
+        "testjs": "latest"
+    },
+    "scripts": {
+        "make": "npm run-script compile && npm test",
+        "compile": "ccjs btree.js --warning_level=VERBOSE --compilation_level=ADVANCED_OPTIMIZATIONS --externs=externs/minimal-env.js --language_in=ECMASCRIPT5_STRICT > btree.min.js",
+        "test": "node node_modules/testjs/bin/testjs"
+    },
+    "license": "Apache-2.0"
+}
