@@ -1,9 +1,10 @@
 ![btree.js](https://raw.github.com/dcodeIO/btree.js/master/btree.png)
 ==============
-A ridiculously lean B-tree of variable orders in plain JavaScript.
 
 Features
 --------
+* Supports variable orders
+* Implemented in plain JavaScript
 * Compiled with ClosureCompiler.js using advanced optimizations
 * Zero vebose warnings and errors, 100% typed code
 * Zero dependencies
