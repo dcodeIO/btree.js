@@ -1,5 +1,5 @@
 /*
- Copyright 2013 The dojo authors (http://www.dojojs.org)
+ Copyright 2013 Daniel Wirtz <dcode@dcode.io>
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 
 /**
- * @license dojo-btree (c) 2013 Daniel Wirtz <dcode@dcode.io>
+ * @license btree.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
  * Released under the Apache License, Version 2.0
- * see: http://www.dojojs.org for details
+ * see: http://github.com/dcodeIO/btree.js for details
  */
 (function(module, console) {
     'use strict';
@@ -544,6 +544,17 @@
                 } else { // If the key does not exist
                     ptr = result.node; // set ptr to the insertion node
                     index = result.index; // and start at the insertion index (key > minKey)
+                    if (index >= ptr.leaves.length) { // on overrun, start at the first element of the right node
+                        if (ptr.parent instanceof Tree) {
+                            return; // empty range
+                        }
+                        index = asearch(ptr.parent.nodes, ptr)+1;
+                        if (index >= ptr.parent.nodes.length) {
+                            return; // empty range
+                        }
+                        ptr = ptr.parent.nodes[index];
+                        index = 0;
+                    }
                 }
             }
             // ptr/index now points at our first result
@@ -618,7 +629,13 @@
                     ptr = result.node; // set ptr to the insertion node
                     index = result.index-1; // and start at the insertion index-1 (key < maxKey)
                     while (index < 0) { // on underrun, begin at the seperator in the parent
+                        if (ptr.parent instanceof Tree) {
+                            return; // empty range
+                        }
                         index = asearch(ptr.parent.nodes, ptr)-1;
+                        if (index < 0) {
+                            return; // empty range
+                        }
                         ptr = ptr.parent;
                     }
                 }

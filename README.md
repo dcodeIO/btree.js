@@ -94,7 +94,7 @@ The test suite contains a 100k benchmark:
     <img src="https://raw.github.com/dcodeIO/btree.js/master/bench.jpg" alt="benchmark" />
 </p>
 
-Ran in node v0.10.3 on one core of an 3.40Ghz Intel Core i7-2600K working with premium DDR3 ram (I'm too lazy to look
+Ran in node v0.10.5 on one core of an 3.40Ghz Intel Core i7-2600K working with premium DDR3 ram (I'm too lazy to look
 up the exact model). To test on your own hardware, simply run `npm [-g] install testjs` && `npm test`.
 
 [testjs](https://github.com/dcodeIO/test.js) itself is an optimized wrapper around node's native assert module.
