@@ -84,7 +84,23 @@ module.exports = {
         test.deepEqual(res, comp);
         test.done();
     },
-    
+
+    "walkEmptyRanges": function(test) {
+        test.doesNotThrow(function() {
+            tree.walkAsc(37, 40, function() { test.ok(false) })
+        })
+        test.doesNotThrow(function() {
+            tree.walkAsc(0, 1, function() { test.ok(false) })
+        })
+        test.doesNotThrow(function() {
+            tree.walkDesc(37, 40, function() { test.ok(false) })
+        })
+        test.doesNotThrow(function() {
+            tree.walkDesc(0, 1, function() { test.ok(false) })
+        })
+        test.done()
+    },
+
     "count": function(test) {
         test.strictEqual(tree.count(), 20);
         test.done();

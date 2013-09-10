@@ -546,6 +546,11 @@
                     index = result.index; // and start at the insertion index (key > minKey)
                 }
             }
+
+            if (ptr.leaves.length <= index) {
+                return;
+            }
+
             // ptr/index now points at our first result
             while (true) {
                 if (maxKey !== null && compare(ptr.leaves[index].key, maxKey) > 0) {
@@ -618,6 +623,9 @@
                     ptr = result.node; // set ptr to the insertion node
                     index = result.index-1; // and start at the insertion index-1 (key < maxKey)
                     while (index < 0) { // on underrun, begin at the seperator in the parent
+                        if (!ptr.parent.nodes) {
+                            return;
+                        }
                         index = asearch(ptr.parent.nodes, ptr)-1;
                         ptr = ptr.parent;
                     }
