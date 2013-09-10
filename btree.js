@@ -544,16 +544,15 @@
                 } else { // If the key does not exist
                     ptr = result.node; // set ptr to the insertion node
                     index = result.index; // and start at the insertion index (key > minKey)
-                    if (index >= ptr.leaves.length) { // on overrun, start at the first element of the right node
+                    if (index >= ptr.leaves.length) { // on overrun, begin at the separator in the parent
                         if (ptr.parent instanceof Tree) {
                             return; // empty range
                         }
-                        index = asearch(ptr.parent.nodes, ptr)+1;
-                        if (index >= ptr.parent.nodes.length) {
+                        index = asearch(ptr.parent.nodes, ptr);
+                        if (index >= ptr.parent.leaves.length) {
                             return; // empty range
                         }
-                        ptr = ptr.parent.nodes[index];
-                        index = 0;
+                        ptr = ptr.parent;
                     }
                 }
             }
@@ -628,7 +627,7 @@
                 } else { // If the key does not exist
                     ptr = result.node; // set ptr to the insertion node
                     index = result.index-1; // and start at the insertion index-1 (key < maxKey)
-                    while (index < 0) { // on underrun, begin at the seperator in the parent
+                    while (index < 0) { // on underrun, begin at the separator in the parent
                         if (ptr.parent instanceof Tree) {
                             return; // empty range
                         }
