@@ -46,7 +46,7 @@ Strict string comparator that compares strings character by character.
 #### new Tree()
 Constructs a Tree instance of the order specified to `btree.create` previously.
 
-#### Tree#put(key:*, value:*):boolean
+#### Tree#put(key:*, value:*[, overwrite:boolean=true]):boolean
 Puts a non-undefined, non-null key with the given non-undefined value into the tree. You have to type check keys on your
 own.
 

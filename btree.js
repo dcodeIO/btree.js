@@ -230,7 +230,7 @@
          * @param {!*} key
          * @param {*} value
          * @param {boolean=} overwrite Whether to overwrite existing values, defaults to `true`
-         * @returns {boolean} true if successfully added, false if already present
+         * @returns {boolean} true if successfully set, false if already present and overwrite is `false`
          */
         TreeNode.prototype.put = function(key, value, overwrite) {
             var result = this.search(key);
@@ -483,7 +483,7 @@
          * @param {!*} key
          * @param {*} value
          * @param {boolean=} overwrite Whether to overwrite existing values, defaults to `true`
-         * @returns {boolean} true if inserted, false if already present
+         * @returns {boolean} true if set, false if already present and overwrite is `false`
          * @throws {Error} If the key is undefined or null or the value is undefined
          * @expose
          */
