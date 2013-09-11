@@ -229,11 +229,18 @@
          * Inserts a key/value pair into this node.
          * @param {!*} key
          * @param {*} value
+         * @param {boolean=} overwrite Whether to overwrite existing values, defaults to `true`
          * @returns {boolean} true if successfully added, false if already present
          */
-        TreeNode.prototype.put = function(key, value) {
+        TreeNode.prototype.put = function(key, value, overwrite) {
             var result = this.search(key);
-            if (result.leaf) return false; // Key already exists
+            if (result.leaf) {
+                if (typeof overwrite !== 'undefined' && !overwrite) {
+                    return false;
+                }
+                result.leaf.value = value;
+                return true;
+            } // Key already exists
             var node = result.node,
                 index = result.index;
             node.leaves.splice(index, 0, new Leaf(node, key, value));
@@ -475,14 +482,15 @@
          * Inserts a key/value pair into the tree.
          * @param {!*} key
          * @param {*} value
+         * @param {boolean=} overwrite Whether to overwrite existing values, defaults to `true`
          * @returns {boolean} true if inserted, false if already present
          * @throws {Error} If the key is undefined or null or the value is undefined
          * @expose
          */
-        Tree.prototype.put = function(key, value) {
-            if (typeof key == 'undefined' || key === null)  throw(new Error("Illegal key: "+key));
-            if (typeof value == 'undefined') throw(new Error("Illegal value: "+value));
-            return this.root.put(key, value);
+        Tree.prototype.put = function(key, value, overwrite) {
+            if (typeof key === 'undefined' || key === null)  throw(new Error("Illegal key: "+key));
+            if (typeof value === 'undefined') throw(new Error("Illegal value: "+value));
+            return this.root.put(key, value, overwrite);
         };
         
         /**
@@ -493,7 +501,7 @@
          * @expose
          */
         Tree.prototype.get = function(key) {
-            if (typeof key == 'undefined' || key === null)  throw(new Error("Illegal key: "+key));
+            if (typeof key === 'undefined' || key === null)  throw(new Error("Illegal key: "+key));
             return this.root.get(key);
         };
         
@@ -504,7 +512,7 @@
          * @expose
          */
         Tree.prototype.del = function(key) {
-            if (typeof key == 'undefined' || key === null)  throw(new Error("Illegal key: "+key));
+            if (typeof key === 'undefined' || key === null)  throw(new Error("Illegal key: "+key));
             return this.root.del(key);
         };
     

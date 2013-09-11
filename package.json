@@ -1,7 +1,7 @@
 {
     "name": "btreejs",
     "description": "A ridiculously lean B-tree of variable orders in plain JavaScript. Closure-compiled using advanced optimizations, 100% typed code.",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "author": "Daniel Wirtz <dcode@dcode.io>",
     "main": "btree.min.js",
     "repository": {

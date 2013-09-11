@@ -23,14 +23,14 @@ function buildBenchmark(order, size, skipAsserted) {
                 
                 "notExisting": function(test) {
                     for (var i=0; i<max; i+=2) {
-                        test.strictEqual(tree.put(i, i), true);
+                        test.strictEqual(tree.put(i, i, false), true);
                     }
                     test.done();
                 },
 
                 "existing": function(test) {
                     for (var i=0; i<max; i+=2) {
-                        test.strictEqual(tree.put(i, i), false);
+                        test.strictEqual(tree.put(i, i, false), false);
                     }
                     test.done();
                 }
@@ -43,14 +43,14 @@ function buildBenchmark(order, size, skipAsserted) {
             
             "notExisting": function(test) {
                 for (var i=0; i<max; i+=2) {
-                    tree.put(i, i);
+                    tree.put(i, i, false);
                 }
                 test.done();
             },
 
             "existing": function(test) {
                 for (var i=0; i<max; i+=2) {
-                    tree.put(i, i);
+                    tree.put(i, i, false);
                 }
                 test.done();
             }
